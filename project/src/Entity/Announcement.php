@@ -25,7 +25,7 @@ class Announcement
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?DateTime $date = null;
+    private ?DateTime $createdDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'CategoryId')]
     private ?Category $categoryId = null;
@@ -91,12 +91,12 @@ class Announcement
 
     public function getDate(): ?DateTime
     {
-        return $this->date;
+        return $this->createdDate;
     }
 
-    public function setDate(DateTime $date): static
+    public function setDate(DateTime $createdDate): static
     {
-        $this->date = $date;
+        $this->createdDate = $createdDate;
 
         return $this;
     }
@@ -174,6 +174,6 @@ class Announcement
 
     public function __construct()
     {
-        $this->date = new DateTime();
+        $this->createdDate = new DateTime();
     }
 }
