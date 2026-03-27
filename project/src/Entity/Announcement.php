@@ -21,7 +21,7 @@ class Announcement
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
     #[ORM\Column]
@@ -170,5 +170,10 @@ class Announcement
         $this->InterestedUserId = $InterestedUserId;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->date = new DateTime();
     }
 }

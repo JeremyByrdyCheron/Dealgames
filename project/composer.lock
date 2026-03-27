@@ -171,16 +171,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "4.4.2",
+            "version": "4.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "476f7f0fa6ea4aa5364926db7fabdf6049075722"
+                "reference": "61e730f1658814821a85f2402c945f3883407dec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/476f7f0fa6ea4aa5364926db7fabdf6049075722",
-                "reference": "476f7f0fa6ea4aa5364926db7fabdf6049075722",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/61e730f1658814821a85f2402c945f3883407dec",
+                "reference": "61e730f1658814821a85f2402c945f3883407dec",
                 "shasum": ""
             },
             "require": {
@@ -257,7 +257,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/4.4.2"
+                "source": "https://github.com/doctrine/dbal/tree/4.4.3"
             },
             "funding": [
                 {
@@ -273,7 +273,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-26T12:12:19+00:00"
+            "time": "2026-03-20T08:52:12+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -1730,16 +1730,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "6.0.2",
+            "version": "6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "897b5986ece6b4f9d8413fea345c7d49c757d6bf"
+                "reference": "7bae67520aa9f5ecc506d646810bd40d9da54582"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/897b5986ece6b4f9d8413fea345c7d49c757d6bf",
-                "reference": "897b5986ece6b4f9d8413fea345c7d49c757d6bf",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/7bae67520aa9f5ecc506d646810bd40d9da54582",
+                "reference": "7bae67520aa9f5ecc506d646810bd40d9da54582",
                 "shasum": ""
             },
             "require": {
@@ -1789,9 +1789,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/6.0.2"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/6.0.3"
             },
-            "time": "2026-03-01T18:43:49+00:00"
+            "time": "2026-03-18T20:49:53+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -6444,16 +6444,16 @@
         },
         {
             "name": "symfony/stimulus-bundle",
-            "version": "v2.33.0",
+            "version": "v2.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stimulus-bundle.git",
-                "reference": "581fe67a2a85c10ce315aeba15425d5a7002526d"
+                "reference": "d610a2e021cf63f955838b4bfe40da7e4cafe850"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/581fe67a2a85c10ce315aeba15425d5a7002526d",
-                "reference": "581fe67a2a85c10ce315aeba15425d5a7002526d",
+                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/d610a2e021cf63f955838b4bfe40da7e4cafe850",
+                "reference": "d610a2e021cf63f955838b4bfe40da7e4cafe850",
                 "shasum": ""
             },
             "require": {
@@ -6493,7 +6493,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/stimulus-bundle/tree/v2.33.0"
+                "source": "https://github.com/symfony/stimulus-bundle/tree/v2.34.0"
             },
             "funding": [
                 {
@@ -6513,7 +6513,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-15T07:57:29+00:00"
+            "time": "2026-03-21T22:29:11+00:00"
         },
         {
             "name": "symfony/stopwatch",
@@ -7121,16 +7121,16 @@
         },
         {
             "name": "symfony/ux-turbo",
-            "version": "v2.33.0",
+            "version": "v2.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-turbo.git",
-                "reference": "493436bc109f87663ca45c3bac8678b62a5d861f"
+                "reference": "87511f621db238302a3bb819958a72feda27fc45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/493436bc109f87663ca45c3bac8678b62a5d861f",
-                "reference": "493436bc109f87663ca45c3bac8678b62a5d861f",
+                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/87511f621db238302a3bb819958a72feda27fc45",
+                "reference": "87511f621db238302a3bb819958a72feda27fc45",
                 "shasum": ""
             },
             "require": {
@@ -7200,7 +7200,7 @@
                 "turbo-stream"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-turbo/tree/v2.33.0"
+                "source": "https://github.com/symfony/ux-turbo/tree/v2.34.0"
             },
             "funding": [
                 {
@@ -7220,7 +7220,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-15T07:57:29+00:00"
+            "time": "2026-03-21T22:29:11+00:00"
         },
         {
             "name": "symfony/validator",
@@ -9174,16 +9174,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "9.0.1",
+            "version": "9.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "e26e9a944bd9d27b3a38a82fc2093d440951bfbe"
+                "reference": "c4a2dc54b1a24e13ef1839cbb5947b967cbae853"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/e26e9a944bd9d27b3a38a82fc2093d440951bfbe",
-                "reference": "e26e9a944bd9d27b3a38a82fc2093d440951bfbe",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/c4a2dc54b1a24e13ef1839cbb5947b967cbae853",
+                "reference": "c4a2dc54b1a24e13ef1839cbb5947b967cbae853",
                 "shasum": ""
             },
             "require": {
@@ -9198,7 +9198,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.0-dev"
+                    "dev-main": "9.1-dev"
                 }
             },
             "autoload": {
@@ -9226,7 +9226,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
                 "security": "https://github.com/sebastianbergmann/environment/security/policy",
-                "source": "https://github.com/sebastianbergmann/environment/tree/9.0.1"
+                "source": "https://github.com/sebastianbergmann/environment/tree/9.1.0"
             },
             "funding": [
                 {
@@ -9246,7 +9246,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-15T07:13:02+00:00"
+            "time": "2026-03-22T06:31:50+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -10171,19 +10171,20 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.66.0",
+            "version": "v1.67.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "b5b4afa2a570b926682e9f34615a6766dd560ff4"
+                "reference": "6ce8b313845f16bcf385ee3cb31d8b24e30d5516"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/b5b4afa2a570b926682e9f34615a6766dd560ff4",
-                "reference": "b5b4afa2a570b926682e9f34615a6766dd560ff4",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/6ce8b313845f16bcf385ee3cb31d8b24e30d5516",
+                "reference": "6ce8b313845f16bcf385ee3cb31d8b24e30d5516",
                 "shasum": ""
             },
             "require": {
+                "composer-runtime-api": "^2.1",
                 "doctrine/inflector": "^2.0",
                 "nikic/php-parser": "^5.0",
                 "php": ">=8.1",
@@ -10245,7 +10246,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.66.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.67.0"
             },
             "funding": [
                 {
@@ -10265,7 +10266,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-09T08:55:54+00:00"
+            "time": "2026-03-18T13:39:06+00:00"
         },
         {
             "name": "symfony/web-profiler-bundle",
