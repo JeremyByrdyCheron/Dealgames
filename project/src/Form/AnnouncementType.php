@@ -8,6 +8,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
@@ -17,22 +18,24 @@ class AnnouncementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
+            ->add('title', TextType::class)
             ->add('description')
             ->add('date')
             // ->add('imageName')
             ->add('imageFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
-                'delete_label' => '...',
-                'download_uri' => '...',
-                'download_label' => '...',
+                'delete_label' => 'Supprimer',
+                'download_uri' => true,
+                'download_label' => 'Voir le fichier',
                 'asset_helper' => true,
+                'label' => 'Image:'
             ])
-            // ->add('categoryId', EntityType::class, [
-            //     'class' => Category::class,
-            //     'choice_label' => 'id',
-            // ])
+            ->add('categoryId', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'label' => 'Catégorie: '
+            ])
             // ->add('authorId', EntityType::class, [
             //     'class' => User::class,
             //     'choice_label' => 'id',
