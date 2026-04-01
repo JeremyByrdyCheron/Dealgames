@@ -20,15 +20,4 @@ final class HomeController extends AbstractController
             'announcements' => $announcements
         ]);
     }
-    #[Route('/home', name: 'app_login')]
-    public function index2(AnnouncementRepository $announcementRepository): Response
-    {
-
-        $announcements = $announcementRepository->findAll();
-
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-            'announcements' => $announcements
-        ]);
-    }
 }
