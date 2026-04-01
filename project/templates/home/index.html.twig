@@ -3,28 +3,33 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-<a href="announcement/create">Créer une annonce</a>
+	<a href="announcement/create">Créer une annonce</a>
 
-{% for announcement in announcements %}
-	<div class="announcement-card">
+	{% for announcement in announcements %}
+		<div class="announcement-card">
 
-		<h2>{{ announcement.title }}</h2>
+			<h2>{{ announcement.title }}</h2>
 
-		<p>
-			<strong>Catégorie :</strong>
-			{{ announcement.categoryId ? announcement.categoryId.name : 'Non définie' }}</p>
+			<p>
+				<strong>Catégorie :</strong>
+				{{ announcement.categoryId ? announcement.categoryId.name : 'Non définie' }}</p>
 
-		<p>
-			<strong>Date :</strong>
-			{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
+			<p>
+				<strong>Date :</strong>
+				{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
 
-		<p>{{ announcement.description }}</p>
+			<p>{{ announcement.description }}</p>
 
-		<a href="{{ path('announcement.edit', {id: announcement.id}) }}">Éditer</a>
-		<form method="POST" action="{{path('announcement.delete', {id: announcement.id})}}" onsubmit="return confirm ('tu es sûr ?');">
-			<button type="submit">Supprimer</button>
-		</form>
+			<a href="{{ path('announcement.edit', {id: announcement.id}) }}">Éditer</a>
+			<form method="POST" action="{{path('announcement.delete', {id: announcement.id})}}" onsubmit="return confirm ('tu es sûr ?');">
+				<button type="submit">Supprimer</button>
+			</form>
 
-		{% if announcement.imageName %}
-			<div>
-				<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}" </div> {% endif %} </div> {% endfor %} {% endblock %}
+			{% if announcement.imageName %}
+				<div>
+					<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
+				</div>
+			{% endif %}
+		</div>
+	{% endfor %}
+{% endblock %}
