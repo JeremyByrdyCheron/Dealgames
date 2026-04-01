@@ -3,28 +3,25 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-	<a href="announcement/create">Créer une annonce</a>
+<a href="announcement/create">Créer une annonce</a>
 
-  {% for announcement in announcements %}
-            <div class="announcement-card" >
-                
-                <h2>{{ announcement.title }}</h2>
+{% for announcement in announcements %}
+	<div class="announcement-card">
 
-                <p><strong>Catégorie :</strong> {{ announcement.categoryId ? announcement.categoryId.name : 'Non définie' }}</p>
-                
-                <p><strong>Date :</strong> {{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
+		<h2>{{ announcement.title }}</h2>
 
-                <p>{{ announcement.description }}</p>
+		<p>
+			<strong>Catégorie :</strong>
+			{{ announcement.categoryId ? announcement.categoryId.name : 'Non définie' }}</p>
 
-                {% if announcement.imageName %}
-                    <div>
-                        <img src="{{ asset('images/products/' ~ announcement.imageName) }}" 
-                             alt="Image de {{ announcement.title }}" 
-                    </div>
-                {% endif %}
+		<p>
+			<strong>Date :</strong>
+			{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
 
-            </div>
-        {% endfor %}
+		<p>{{ announcement.description }}</p>
 
+		<a href="{{ path('announcement.edit', {id: announcement.id}) }}">Éditer</a>
 
-{% endblock %}
+		{% if announcement.imageName %}
+			<div>
+				<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}" </div> {% endif %} </div> {% endfor %} {% endblock %}

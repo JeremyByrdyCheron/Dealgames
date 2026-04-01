@@ -37,4 +37,19 @@ final class AnnouncementController extends AbstractController
         }
         return $this->render('announcement/create.html.twig', ['form' => $form]);
     }
+
+    #[Route("announcement-{id}/edit", name: "announcement.edit")]
+    public function edit(Request $request, EntityManagerInterface $em, Announcement $announcement)
+    {
+        $form = $this->createForm(AnnouncementType::class, $announcement);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $em->flush();
+                return $this->redirectToRoute("home");
+            }
+            dd($form->getErrors(true, false));
+        }
+        return $this->render("announcement/edit.html.twig", ["announcement" => $announcement, "form" => $form->createView()]);
+    }
 }
