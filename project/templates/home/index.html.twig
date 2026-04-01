@@ -21,6 +21,9 @@
 		<p>{{ announcement.description }}</p>
 
 		<a href="{{ path('announcement.edit', {id: announcement.id}) }}">Éditer</a>
+		<form method="POST" action="{{path('announcement.delete', {id: announcement.id})}}" onsubmit="return confirm ('tu es sûr ?');">
+			<button type="submit">Supprimer</button>
+		</form>
 
 		{% if announcement.imageName %}
 			<div>

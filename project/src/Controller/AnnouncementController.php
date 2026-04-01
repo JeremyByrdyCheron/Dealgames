@@ -52,4 +52,12 @@ final class AnnouncementController extends AbstractController
         }
         return $this->render("announcement/edit.html.twig", ["announcement" => $announcement, "form" => $form->createView()]);
     }
+
+    #[Route("announcement-{id}/delete", name: "announcement.delete", methods: ["POST"])]
+    public function delete(EntityManagerInterface $em, Announcement $announcement)
+    {
+        $em->remove($announcement);
+        $em->flush();
+        return $this->redirectToRoute("home");
+    }
 }
