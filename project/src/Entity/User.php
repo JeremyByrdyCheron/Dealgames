@@ -219,9 +219,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->AnnouncementInterested->contains($announcementInterested)) {
             $this->AnnouncementInterested->add($announcementInterested);
-            $announcementInterested->setInterestedUserId($this);
+            $announcementInterested->addInterestedUserId($this);
         }
-
         return $this;
     }
 

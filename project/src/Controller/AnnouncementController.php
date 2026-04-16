@@ -62,7 +62,7 @@ final class AnnouncementController extends AbstractController
         $user = $this->getUser();
 
         if (!$user->isVerified()) {
-            $this->addFlash('error', 'Veuillez vérifier votre email.');
+            $this->addFlash('error', 'Vous ne pouvez pas modifier d\'annonces si votre compte n\'est pas vérifié. Veuillez vérifier votre email.');
             return $this->redirectToRoute('home');
         }
         $form = $this->createForm(AnnouncementType::class, $announcement);
@@ -88,7 +88,7 @@ final class AnnouncementController extends AbstractController
         $user = $this->getUser();
 
         if (!$user->isVerified()) {
-            $this->addFlash('error', 'Veuillez vérifier votre email.');
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer d\'annonces si votre compte n\'est pas vérifié. Veuillez vérifier votre email.');
             return $this->redirectToRoute('home');
         }
         $em->remove($announcement);
@@ -113,7 +113,7 @@ final class AnnouncementController extends AbstractController
         $user = $this->getUser();
 
         if (!$user->isVerified()) {
-            $this->addFlash('error', 'Veuillez vérifier votre email.');
+            $this->addFlash('error', 'Vous ne pouvez pas apprécier d\'annonces si votre compte n\'est pas vérifié. Veuillez vérifier votre email.');
             return $this->redirectToRoute('home');
         }
 
