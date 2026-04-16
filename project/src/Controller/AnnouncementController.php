@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Announcement;
+use App\Entity\User;
 use App\Form\AnnouncementType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,6 +28,13 @@ final class AnnouncementController extends AbstractController
     #[Route("/announcement/create", name: "create-announcement")]
     public function create(Request $request, EntityManagerInterface $em)
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!$user->isVerified()) {
+            $this->addFlash('error', 'Veuillez vérifier votre email.');
+            return $this->redirectToRoute('home');
+        }
         $announcement = new Announcement();
         $announcement->setAuthorId($this->getUser());
         $form = $this->createForm(AnnouncementType::class, $announcement);
@@ -49,6 +57,14 @@ final class AnnouncementController extends AbstractController
         if ($this->getUser() !== $announcement->getAuthorId()) {
             throw $this->createAccessDeniedException('Accès refusé.');
         }
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!$user->isVerified()) {
+            $this->addFlash('error', 'Veuillez vérifier votre email.');
+            return $this->redirectToRoute('home');
+        }
         $form = $this->createForm(AnnouncementType::class, $announcement);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
@@ -64,8 +80,16 @@ final class AnnouncementController extends AbstractController
     #[Route("announcement-{id}/delete", name: "announcement.delete", methods: ["POST"])]
     public function delete(EntityManagerInterface $em, Announcement $announcement)
     {
+
         if ($this->getUser() !== $announcement->getAuthorId()) {
             throw $this->createAccessDeniedException("Vous n'êtes pas autorisé à supprimer cette annonce.");
+        }
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!$user->isVerified()) {
+            $this->addFlash('error', 'Veuillez vérifier votre email.');
+            return $this->redirectToRoute('home');
         }
         $em->remove($announcement);
         $em->flush();
@@ -85,7 +109,13 @@ final class AnnouncementController extends AbstractController
     #[Route('announcement/{id}/interest', name: 'announcement.interest')]
     public function addInterest(Announcement $announcement, EntityManagerInterface $em, Request $request): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
+
+        if (!$user->isVerified()) {
+            $this->addFlash('error', 'Veuillez vérifier votre email.');
+            return $this->redirectToRoute('home');
+        }
 
         if ($announcement->getInterestedUserId()->contains($user)) {
             $announcement->removeInterestedUserId($user);

@@ -9,6 +9,12 @@
 
 	</head>
 	<body>
+		{% for message in app.flashes('error') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+
 		<nav>
 			<a href=" {{ path('home') }} ">
 				Accueil</a>
