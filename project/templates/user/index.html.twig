@@ -9,7 +9,35 @@
 			{{user.firstname}}
 			{{user.lastname}}
 		</h1>
+		<h2>
+			Vos annonces
+		</h2>
 		{% for announcement in announcements %}
+			<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
+
+				<h2>{{ announcement.title }}</h2>
+
+				<p>
+					<strong>Catégorie :</strong>
+					{{ announcement.category ? announcement.category.name : 'Non définie' }}</p>
+
+				<p>
+					<strong>Date :</strong>
+					{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
+
+				<p>{{ announcement.description }}</p>
+
+				{% if announcement.imageName %}
+					<div>
+						<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
+					</div>
+				{% endif %}
+			</a>
+		{% endfor %}
+		<h2>
+			Les annonces qui vous intéressent
+		</h2>
+		{% for announcement in interestedAnnouncements %}
 			<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
 
 				<h2>{{ announcement.title }}</h2>

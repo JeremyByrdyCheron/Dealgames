@@ -16,11 +16,13 @@ final class UserController extends AbstractController
     {
         $user = $this->getUser();
         $announcements = $announcementRepository->findBy(['authorId' => $user]);
+        $interestedAnnouncements = $announcementRepository->findByInterestedUser($user);
 
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
             'user' => $user,
-            'announcements' => $announcements
+            'announcements' => $announcements,
+            'interestedAnnouncements' => $interestedAnnouncements
         ]);
     }
 }

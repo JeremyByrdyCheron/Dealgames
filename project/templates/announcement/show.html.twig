@@ -26,6 +26,15 @@
 				<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
 			</div>
 		{% endif %}
+		<form action="{{ path('announcement.interest', {id: announcement.id}) }}" method="POST">
+			<button type="submit">
+				{% if app.user in announcement.interestedUserId %}
+					Je ne suis plus intéressé
+				{% else %}
+					Je suis intéressé
+				{% endif %}
+			</button>
+		</form>
 		{% if isAuthor===true %}
 
 			<a href="{{ path('announcement.edit', {id: announcement.id}) }}">Éditer</a>

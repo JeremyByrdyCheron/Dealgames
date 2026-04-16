@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\AnnouncementRepository;
 use DateTime;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Attribute as Vich;
 use Symfony\Component\HttpFoundation\File\File;
@@ -48,9 +50,9 @@ class Announcement
     #[ORM\JoinColumn(name: 'author_id', nullable: false)]
     private ?User $authorId = null;
 
-    #[ORM\ManyToOne(inversedBy: 'AnnouncementInterested')]
+    #[ORM\ManyToMany(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'interested_user_id', nullable: true)]
-    private ?User $InterestedUserId = null;
+    private Collection $InterestedUserId;
 
 
     public function setImageFile($imageFile = null): void
@@ -161,20 +163,35 @@ class Announcement
         return $this;
     }
 
-    public function getInterestedUserId(): ?User
+    public function getInterestedUserId(): ?Collection
     {
         return $this->InterestedUserId;
     }
 
-    public function setInterestedUserId(?User $InterestedUserId): static
+    public function setInterestedUserId(?Collection $InterestedUserId): static
     {
         $this->InterestedUserId = $InterestedUserId;
 
         return $this;
     }
 
+    public function addInterestedUserId(User $user): static
+    {
+        if (!$this->InterestedUserId->contains($user)) {
+            $this->InterestedUserId->add($user);
+        }
+        return $this;
+    }
+    public function removeInterestedUserId(User $user): static
+    {
+        $this->InterestedUserId->removeElement($user);
+        return $this;
+    }
+
+
     public function __construct()
     {
         $this->createdDate = new DateTime();
+        $this->InterestedUserId = new ArrayCollection();
     }
 }

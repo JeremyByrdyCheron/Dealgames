@@ -81,4 +81,20 @@ final class AnnouncementController extends AbstractController
             "isAuthor" => $isAuthor
         ]);
     }
+
+    #[Route('announcement/{id}/interest', name: 'announcement.interest')]
+    public function addInterest(Announcement $announcement, EntityManagerInterface $em, Request $request): Response
+    {
+        $user = $this->getUser();
+
+        if ($announcement->getInterestedUserId()->contains($user)) {
+            $announcement->removeInterestedUserId($user);
+        } else {
+            $announcement->addInterestedUserId($user);
+        }
+
+        $em->flush();
+
+        return $this->redirect($request->headers->get('referer'));
+    }
 }
