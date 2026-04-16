@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\AnnouncementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,10 +12,15 @@ final class UserController extends AbstractController
 {
     #[IsGranted('ROLE_CONNECTED_USER')]
     #[Route('/user', name: 'user')]
-    public function index(): Response
+    public function index(AnnouncementRepository $announcementRepository): Response
     {
+        $user = $this->getUser();
+        $announcements = $announcementRepository->findBy(['authorId' => $user]);
+
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
+            'user' => $user,
+            'announcements' => $announcements
         ]);
     }
 }

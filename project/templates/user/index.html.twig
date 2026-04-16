@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Profil
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div>
+		<h1>
+			{{user.firstname}}
+			{{user.lastname}}
+		</h1>
+		{% for announcement in announcements %}
+			<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+				<h2>{{ announcement.title }}</h2>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/var/www/src/Controller/UserController.php</code></li>
-        <li>Your template at <code>/var/www/templates/user/index.html.twig</code></li>
-    </ul>
-</div>
+				<p>
+					<strong>Catégorie :</strong>
+					{{ announcement.category ? announcement.category.name : 'Non définie' }}</p>
+
+				<p>
+					<strong>Date :</strong>
+					{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
+
+				<p>{{ announcement.description }}</p>
+
+				{% if announcement.imageName %}
+					<div>
+						<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
+					</div>
+				{% endif %}
+			</a>
+		{% endfor %}
+	</div>
 {% endblock %}

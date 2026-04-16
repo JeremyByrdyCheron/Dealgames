@@ -9,6 +9,13 @@
 
 	</head>
 	<body>
+		<nav>
+			<a href=" {{ path('home') }} ">
+				Accueil</a>
+			<a href=" {{ path('user') }} ">
+				Profil</a>
+		</nav>
+
 		{% block body %}{% endblock %}
 	</body>
 </html>
