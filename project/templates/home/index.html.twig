@@ -3,10 +3,10 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-	<a href="announcement/create">Créer une annonce</a>
+	<a href=" {{ path( 'create-announcement' ) }} ">Créer une annonce</a>
 
 	{% for announcement in announcements %}
-		<div class="announcement-card">
+		<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
 
 			<h2>{{ announcement.title }}</h2>
 
@@ -25,11 +25,6 @@
 					<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
 				</div>
 			{% endif %}
-			<a href="{{ path('announcement.edit', {id: announcement.id}) }}">Éditer</a>
-			<form method="POST" action="{{path('announcement.delete', {id: announcement.id})}}" onsubmit="return confirm ('tu es sûr ?');">
-				<button type="submit">Supprimer</button>
-			</form>
-
-		</div>
+		</a>
 	{% endfor %}
 {% endblock %}

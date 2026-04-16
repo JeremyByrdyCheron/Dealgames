@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class AnnouncementController extends AbstractController
 {
@@ -20,10 +22,13 @@ final class AnnouncementController extends AbstractController
         ]);
     }
 
+
+    #[IsGranted('ROLE_CONNECTED_USER')]
     #[Route("/announcement/create", name: "create-announcement")]
     public function create(Request $request, EntityManagerInterface $em)
     {
         $announcement = new Announcement();
+        $announcement->setAuthorId($this->getUser());
         $form = $this->createForm(AnnouncementType::class, $announcement);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
@@ -41,6 +46,9 @@ final class AnnouncementController extends AbstractController
     #[Route("announcement-{id}/edit", name: "announcement.edit")]
     public function edit(Request $request, EntityManagerInterface $em, Announcement $announcement)
     {
+        if ($this->getUser() !== $announcement->getAuthorId()) {
+            throw $this->createAccessDeniedException('Accès refusé.');
+        }
         $form = $this->createForm(AnnouncementType::class, $announcement);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
@@ -56,8 +64,21 @@ final class AnnouncementController extends AbstractController
     #[Route("announcement-{id}/delete", name: "announcement.delete", methods: ["POST"])]
     public function delete(EntityManagerInterface $em, Announcement $announcement)
     {
+        if ($this->getUser() !== $announcement->getAuthorId()) {
+            throw $this->createAccessDeniedException("Vous n'êtes pas autorisé à supprimer cette annonce.");
+        }
         $em->remove($announcement);
         $em->flush();
         return $this->redirectToRoute("home");
+    }
+
+    #[Route("announcement/{id}/consult", name: "announcement.show")]
+    public function show(Announcement $announcement): Response
+    {
+        $isAuthor = $this->getUser() == $announcement->getAuthorId() ? true : false;
+        return $this->render("announcement/show.html.twig", [
+            "announcement" => $announcement,
+            "isAuthor" => $isAuthor
+        ]);
     }
 }

@@ -45,7 +45,7 @@ class Announcement
     private ?DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'AnnouncePublished')]
-    #[ORM\JoinColumn(name: 'author_id', nullable: true)]
+    #[ORM\JoinColumn(name: 'author_id', nullable: false)]
     private ?User $authorId = null;
 
     #[ORM\ManyToOne(inversedBy: 'AnnouncementInterested')]
