@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Attribute as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use App\Enum\Category;
 
 #[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: AnnouncementRepository::class)]
@@ -27,8 +28,8 @@ class Announcement
     #[ORM\Column]
     private ?DateTime $createdDate = null;
 
-    #[ORM\ManyToOne(inversedBy: 'CategoryId')]
-    private ?Category $categoryId = null;
+    #[ORM\Column(enumType: Category::class)]
+    private ?Category $category = null;
 
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
@@ -101,14 +102,14 @@ class Announcement
         return $this;
     }
 
-    public function getCategoryId(): ?Category
+    public function getcategory(): ?Category
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
-    public function setCategoryId(?Category $categoryId): static
+    public function setcategory(?Category $category): static
     {
-        $this->categoryId = $categoryId;
+        $this->category = $category;
 
         return $this;
     }
