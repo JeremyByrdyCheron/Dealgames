@@ -9,6 +9,16 @@
 			{{user.firstname}}
 			{{user.lastname}}
 		</h1>
+
+		<p>
+			{{user.email}}
+		</p>
+		<p>
+			<a href="{{ path('forgotten_password') }}">Réinitialiser le mot de passe</a>
+		</p>
+		<p>
+			<a href="{{ path('app_logout') }}">Se déconnecter</a>
+		</p>
 		<h2>
 			Vos annonces
 		</h2>
