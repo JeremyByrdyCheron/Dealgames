@@ -47,6 +47,12 @@ docker compose exec php php bin/console doctrine:migrations:migrate
 docker compose exec php chown -R www-data:www-data var
 ```
 
+7. Load fixtures:
+
+```bash
+docker compose exec php bin/console doctrine:fixtures:load
+```
+
 ## Accessing the Application
 
 - Application: http://localhost:8080
@@ -57,6 +63,7 @@ docker compose exec php chown -R www-data:www-data var
 
 - If not yet, create an account on [Register Page](http://localhost:8080/register)
 - Then edit role on [Database](http://localhost:8081/index.php?route=/sql&pos=0&db=symfony&table=user) setting `["ROLE_ADMIN"]` and set `is_verified` to `1`
+
 
 ## Database Credentials
 
