@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\AnnouncementType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -24,7 +25,7 @@ final class AnnouncementController extends AbstractController
     }
 
 
-    #[IsGranted('ROLE_CONNECTED_USER')]
+    #[IsGranted(new Expression('is_granted("ROLE_CONNECTED_USER") or is_granted("ROLE_ADMIN")'))]
     #[Route("/announcement/create", name: "create-announcement")]
     public function create(Request $request, EntityManagerInterface $em)
     {
@@ -51,6 +52,7 @@ final class AnnouncementController extends AbstractController
         return $this->render('announcement/create.html.twig', ['form' => $form]);
     }
 
+    #[IsGranted(new Expression('is_granted("ROLE_CONNECTED_USER") or is_granted("ROLE_ADMIN")'))]
     #[Route("announcement-{id}/edit", name: "announcement.edit")]
     public function edit(Request $request, EntityManagerInterface $em, Announcement $announcement)
     {
@@ -77,6 +79,7 @@ final class AnnouncementController extends AbstractController
         return $this->render("announcement/edit.html.twig", ["announcement" => $announcement, "form" => $form->createView()]);
     }
 
+    #[IsGranted(new Expression('is_granted("ROLE_CONNECTED_USER") or is_granted("ROLE_ADMIN")'))]
     #[Route("announcement-{id}/delete", name: "announcement.delete", methods: ["POST"])]
     public function delete(EntityManagerInterface $em, Announcement $announcement)
     {
@@ -106,6 +109,7 @@ final class AnnouncementController extends AbstractController
         ]);
     }
 
+    #[IsGranted(new Expression('is_granted("ROLE_CONNECTED_USER") or is_granted("ROLE_ADMIN")'))]
     #[Route('announcement/{id}/interest', name: 'announcement.interest')]
     public function addInterest(Announcement $announcement, EntityManagerInterface $em, Request $request): Response
     {
