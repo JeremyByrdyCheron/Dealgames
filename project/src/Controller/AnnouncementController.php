@@ -102,13 +102,19 @@ final class AnnouncementController extends AbstractController
     #[Route("announcement/{id}/consult", name: "announcement.show")]
     public function show(Announcement $announcement): Response
     {
-        $isAuthor = $this->getUser() == $announcement->getAuthorId() ? true : false;
-        if (in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
-            $isAuthor = true;
+        $isAuthor = false;
+
+        if ($this->getUser()) {
+            $isAuthor = $this->getUser() == $announcement->getAuthorId() ? true : false;
+            if (in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+                $isAuthor = true;
+            }
         }
+        $author = $announcement->getAuthorId();
         return $this->render("announcement/show.html.twig", [
             "announcement" => $announcement,
-            "isAuthor" => $isAuthor
+            "isAuthor" => $isAuthor,
+            "author" => $author
         ]);
     }
 

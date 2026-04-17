@@ -16,6 +16,11 @@
 			</p>
 
 			<p class="date">
+				Vendu par
+				{{ author.firstname }}
+				{{author.lastname}}
+			</p>
+			<p class="date">
 				Publié le
 				{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}
 			</p>
@@ -39,6 +44,10 @@
 							Je suis intéressé
 						{% endif %}
 					</button>
+					<a href="mailto:{{ author.email }}" class="btn-profile">
+						Contacter le vendeur par mail
+					</a>
+
 				</form>
 			{% endif %}
 
