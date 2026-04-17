@@ -33,15 +33,6 @@ class AnnouncementType extends AbstractType
                 'label' => 'Image:'
             ])
             ->add('category', EnumType::class, ['class' => Category::class])
-            // ->add('authorId', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'id',
-            // ])
-            // ->add('InterestedUserId', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'id',
-            // ])
-            ->add("save", SubmitType::class, ['label' => 'Sauvegarder'])
         ;
     }
 

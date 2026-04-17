@@ -3,25 +3,38 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
-			{% endblock %}
+			{% block title %}{% endblock %}
 		</title>
 
-	</head>
-	<body>
-		{% for message in app.flashes('error') %}
-			<div class="alert alert-danger">
-				{{ message }}
-			</div>
-		{% endfor %}
+		<link rel="stylesheet" href="{{ asset('assets/css/announcements.css') }}"> {% block style %}{% endblock %}
+		</head>
 
-		<nav>
-			<a href=" {{ path('home') }} ">
-				Accueil</a>
-			<a href=" {{ path('user') }} ">
-				Profil</a>
-		</nav>
+		<body>
 
-		{% block body %}{% endblock %}
-	</body>
-</html>
+			{% for message in app.flashes('error') %}
+				<div class="alert alert-danger">
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			<nav class="navbar">
+				<div class="nav-logo">
+					<a href="{{ path('home') }}">Dealgames</a>
+				</div>
+
+				<div class="nav-links">
+					<a href="{{ path('user') }}" class="btn-profile">
+						Profil
+					</a>
+
+					<a href="{{ path('create-announcement') }}" class="btn-create">
+						Créer une annonce
+					</a>
+				</div>
+			</nav>
+
+			<main class="main-content"> {% block body %}{% endblock %}
+				</main>
+
+			</body>
+		</html>

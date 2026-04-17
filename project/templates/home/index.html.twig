@@ -1,30 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Annonces
+{% endblock %}
+{% block style %}
+	<link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">
+{% endblock %}
 
 {% block body %}
-	<a href=" {{ path( 'create-announcement' ) }} ">Créer une annonce</a>
+	<div class="container">
 
-	{% for announcement in announcements %}
-		<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
+		<div class="header">
+			<h1>Dealgames</h1>
+			<a href="{{ path('create-announcement') }}" class="btn-create">
+				Créer une annonce
+			</a>
+		</div>
 
-			<h2>{{ announcement.title }}</h2>
+		<div class="announcements-grid">
+			{% for announcement in announcements %}
+				<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
 
-			<p>
-				<strong>Catégorie :</strong>
-				{{ announcement.category ? announcement.category.name : 'Non définie' }}</p>
+					{% if announcement.imageName %}
+						<div class="card-image">
+							<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
+						</div>
+					{% endif %}
 
-			<p>
-				<strong>Date :</strong>
-				{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
+					<div class="card-content">
+						<h2>{{ announcement.title }}</h2>
 
-			<p>{{ announcement.description }}</p>
+						<p class="category">
+							{{ announcement.category ? announcement.category.name : 'Non définie' }}
+						</p>
 
-			{% if announcement.imageName %}
-				<div>
-					<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
-				</div>
-			{% endif %}
-		</a>
-	{% endfor %}
+						<p class="date">
+							{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}
+						</p>
+
+						<p class="description">
+							{{ announcement.description|slice(0, 120) ~ '...' }}
+						</p>
+					</div>
+
+				</a>
+			{% else %}
+				<p>Aucune annonce disponible.</p>
+			{% endfor %}
+		</div>
+
+	</div>
 {% endblock %}

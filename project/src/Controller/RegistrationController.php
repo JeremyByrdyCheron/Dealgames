@@ -49,12 +49,10 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // Générer le token JWT
             $header = ['typ' => 'JWT', 'alg' => 'HS256'];
             $payload = ['user_id' => $user->getId()];
             $token = $jwt->generate($header, $payload, $this->getParameter('app.jwt_secret'));
 
-            // Envoyer l'e-mail de confirmation
             $mail->send(
                 'no-reply@openblog.test',
                 $user->getEmail(),
@@ -65,7 +63,7 @@ class RegistrationController extends AbstractController
 
             $this->addFlash('success', 'Inscription réussie ! Vérifiez votre email pour activer votre compte.');
 
-            return $this->redirectToRoute('app_login'); // ✅ simple redirect, pas d'auto-login
+            return $this->redirectToRoute('app_login'); 
         }
 
         return $this->render('registration/register.html.twig', [

@@ -56,7 +56,7 @@ final class AnnouncementController extends AbstractController
     #[Route("announcement-{id}/edit", name: "announcement.edit")]
     public function edit(Request $request, EntityManagerInterface $em, Announcement $announcement)
     {
-        if ($this->getUser() !== $announcement->getAuthorId()) {
+        if ($this->getUser() !== $announcement->getAuthorId() && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             throw $this->createAccessDeniedException('Accès refusé.');
         }
 
@@ -84,7 +84,7 @@ final class AnnouncementController extends AbstractController
     public function delete(EntityManagerInterface $em, Announcement $announcement)
     {
 
-        if ($this->getUser() !== $announcement->getAuthorId()) {
+        if ($this->getUser() !== $announcement->getAuthorId() && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             throw $this->createAccessDeniedException("Vous n'êtes pas autorisé à supprimer cette annonce.");
         }
         /** @var User $user */
@@ -103,6 +103,9 @@ final class AnnouncementController extends AbstractController
     public function show(Announcement $announcement): Response
     {
         $isAuthor = $this->getUser() == $announcement->getAuthorId() ? true : false;
+        if (in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+            $isAuthor = true;
+        }
         return $this->render("announcement/show.html.twig", [
             "announcement" => $announcement,
             "isAuthor" => $isAuthor
@@ -116,7 +119,7 @@ final class AnnouncementController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if (!$user->isVerified()) {
+        if (!$user->isVerified() && !in_array('ROLE_ADMIN', $user->getRoles())) {
             $this->addFlash('error', 'Vous ne pouvez pas apprécier d\'annonces si votre compte n\'est pas vérifié. Veuillez vérifier votre email.');
             return $this->redirectToRoute('home');
         }

@@ -1,12 +1,47 @@
 {% extends "base.html.twig" %}
 
-
 {% block body %}
 
-	<a href="{{path('home')}}">Retourner à l'accueil</a>
-	{{form_start(form)}}
+	<div class="container">
 
+		<a href="{{ path('home') }}" class="btn-secondary">
+			Retour à l'accueil
+		</a>
 
-	{{form_end(form)}}
+		<div class="form-card">
+
+			<h1 class="form-title">Modifier l'annonce</h1>
+
+			{{ form_start(form) }}
+
+			<div class="form-group">
+				{{ form_label(form.title) }}
+				{{ form_widget(form.title) }}
+			</div>
+
+			<div class="form-group">
+				{{ form_label(form.description) }}
+				{{ form_widget(form.description) }}
+			</div>
+
+			<div class="form-group">
+				{{ form_label(form.imageFile) }}
+				{{ form_widget(form.imageFile) }}
+			</div>
+
+			<div class="form-group">
+				{{ form_label(form.category) }}
+				{{ form_widget(form.category) }}
+			</div>
+
+			<button class="btn-create">
+				Sauvegarder
+			</button>
+
+			{{ form_end(form) }}
+
+		</div>
+
+	</div>
 
 {% endblock %}

@@ -3,71 +3,90 @@
 {% block title %}Profil
 {% endblock %}
 
+{% block style %}<link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">
+{% endblock %}
+
+
 {% block body %}
-	<div>
-		<h1>
-			{{user.firstname}}
-			{{user.lastname}}
-		</h1>
+	<div class="profile-container">
 
-		<p>
-			{{user.email}}
-		</p>
-		<p>
-			<a href="{{ path('forgotten_password') }}">Réinitialiser le mot de passe</a>
-		</p>
-		<p>
-			<a href="{{ path('app_logout') }}">Se déconnecter</a>
-		</p>
-		<h2>
-			Vos annonces
-		</h2>
-		{% for announcement in announcements %}
-			<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
+		<div class="profile-card">
+			<h1>{{ user.firstname }}
+				{{ user.lastname }}</h1>
 
-				<h2>{{ announcement.title }}</h2>
+			<p class="profile-email">{{ user.email }}</p>
+			<p class="profile-date">
+				Inscrit depuis le
+				{{ user.inscriptionDate|date('d/m/Y') }}
+			</p>
 
-				<p>
-					<strong>Catégorie :</strong>
-					{{ announcement.category ? announcement.category.name : 'Non définie' }}</p>
+			<div class="profile-actions">
+				<a href="{{ path('forgotten_password') }}" class="btn-secondary">
+					Réinitialiser le mot de passe
+				</a>
+				<a href="{{ path('user.edit') }}" class="btn-secondary">
+					Modifier le profil
+				</a>
 
-				<p>
-					<strong>Date :</strong>
-					{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
+				<a href="{{ path('app_logout') }}" class="btn-danger">
+					Se déconnecter
+				</a>
 
-				<p>{{ announcement.description }}</p>
 
-				{% if announcement.imageName %}
-					<div>
-						<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
-					</div>
-				{% endif %}
-			</a>
-		{% endfor %}
-		<h2>
-			Les annonces qui vous intéressent
-		</h2>
-		{% for announcement in interestedAnnouncements %}
-			<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
+			</div>
+		</div>
 
-				<h2>{{ announcement.title }}</h2>
+		<h2 class="section-title">Vos annonces</h2>
 
-				<p>
-					<strong>Catégorie :</strong>
-					{{ announcement.category ? announcement.category.name : 'Non définie' }}</p>
+		<div class="announcements-grid">
+			{% for announcement in announcements %}
+				<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
+					<h2>{{ announcement.title }}</h2>
 
-				<p>
-					<strong>Date :</strong>
-					{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
+					<p class="category">
+						{{ announcement.category ? announcement.category.name : 'Non définie' }}
+					</p>
 
-				<p>{{ announcement.description }}</p>
+					<p class="date">
+						{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}
+					</p>
 
-				{% if announcement.imageName %}
-					<div>
-						<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
-					</div>
-				{% endif %}
-			</a>
-		{% endfor %}
+					<p class="description">{{ announcement.description }}</p>
+
+					{% if announcement.imageName %}
+						<div class="card-image">
+							<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}">
+						</div>
+					{% endif %}
+				</a>
+			{% endfor %}
+		</div>
+
+		<h2 class="section-title">Les annonces qui vous intéressent</h2>
+
+		<div class="announcements-grid">
+			{% for announcement in interestedAnnouncements %}
+				<a href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
+					<h2>{{ announcement.title }}</h2>
+
+					<p class="category">
+						{{ announcement.category ? announcement.category.name : 'Non définie' }}
+					</p>
+
+					<p class="date">
+						{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}
+					</p>
+
+					<p class="description">{{ announcement.description }}</p>
+
+					{% if announcement.imageName %}
+						<div class="card-image">
+							<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}">
+						</div>
+					{% endif %}
+				</a>
+			{% endfor %}
+		</div>
+
 	</div>
 {% endblock %}

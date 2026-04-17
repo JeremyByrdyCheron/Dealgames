@@ -1,50 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Annonce
+{% endblock %}
 
 {% block body %}
-	<a href=" {{ path('create-announcement') }} ">Créer une annonce</a>
 
+	<div class="container">
 
-	<div href="{{ path('announcement.show', {id:announcement.id}) }}" class="announcement-card">
+		<div class="announcement-detail-card">
 
+			<h1>{{ announcement.title }}</h1>
 
-		<h2>{{ announcement.title }}</h2>
+			<p class="category">
+				{{ announcement.category ? announcement.category.name : 'Non définie' }}
+			</p>
 
-		<p>
-			<strong>Catégorie :</strong>
-			{{ announcement.category ? announcement.category.name : 'Non définie' }}</p>
+			<p class="date">
+				Publié le
+				{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}
+			</p>
 
-		<p>
-			<strong>Date :</strong>
-			{{ announcement.date ? announcement.date|date('d/m/Y H:i') : 'Non définie' }}</p>
+			<p class="description">
+				{{ announcement.description }}
+			</p>
 
-		<p>{{ announcement.description }}</p>
+			{% if announcement.imageName %}
+				<div class="detail-image">
+					<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}">
+				</div>
+			{% endif %}
 
-		{% if announcement.imageName %}
-			<div>
-				<img src="{{ asset('images/announcements/' ~ announcement.imageName) }}" alt="Image de {{ announcement.title }}">
-			</div>
-		{% endif %}
-		<form action="{{ path('announcement.interest', {id: announcement.id}) }}" method="POST">
-			<button type="submit">
-				{% if app.user in announcement.interestedUserId %}
-					Je ne suis plus intéressé
-				{% else %}
-					Je suis intéressé
-				{% endif %}
-			</button>
-		</form>
-		{% if isAuthor===true %}
+			{% if isAuthor != true %}
+				<form action="{{ path('announcement.interest', {id: announcement.id}) }}" method="POST">
+					<button type="submit" class="btn-profile">
+						{% if app.user in announcement.interestedUserId %}
+							Je ne suis plus intéressé
+						{% else %}
+							Je suis intéressé
+						{% endif %}
+					</button>
+				</form>
+			{% endif %}
 
-			<a href="{{ path('announcement.edit', {id: announcement.id}) }}">Éditer</a>
-			<form method="POST" action="{{path('announcement.delete', {id: announcement.id})}}" onsubmit="return confirm ('tu es sûr ?');">
-				<button type="submit">Supprimer</button>
-			</form>
-		{% endif %}
+			{% if isAuthor == true %}
+				<div class="actions">
+					<a href="{{ path('announcement.edit', {id: announcement.id}) }}" class="btn-profile">
+						Éditer
+					</a>
 
+					<form method="POST" action="{{ path('announcement.delete', {id: announcement.id}) }}" onsubmit="return confirm('Tu es sûr ?');">
+
+						<button type="submit" class="btn-danger">
+							Supprimer
+						</button>
+
+					</form>
+				</div>
+			{% endif %}
+
+		</div>
 
 	</div>
-
 
 {% endblock %}
